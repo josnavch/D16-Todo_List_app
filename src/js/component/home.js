@@ -1,24 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 //include images into your bundle
 import rigoImage from "../../img/rigo-baby.jpg";
 
+let tareas = [];
+let i = 0;
+let tarea = "";
+
 //create your first component
 export function Home() {
+	let [value, setName] = useState("");
+	let addTodo = "";
+	//let tareas = [];
+
+	function addTodos(event, addTodo) {
+		if (event.key === "Enter") {
+			tareas.push(addTodo);
+			console.log(tareas, tareas.length);
+		}
+	}
+
+	const TodosHTML = tareas.map((tarea, i) => {
+		return <li key={tarea}>{tarea}</li>;
+	});
+
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div className="list">
+			<div className="text-center mt-5">
+				<h1 className="titulo">todos</h1>
+			</div>
+			<div className="text-center mt-5">
+				<ul className="list-group">
+					<input
+						placeholder="Enter your to do's"
+						onChange={e => setName(e.target.value)}
+						onKeyPress={e => addTodos(e, value)}></input>
+					{TodosHTML}
+				</ul>
+			</div>
+			<div className="card-footer text-muted total">Total: 2 todos</div>
 		</div>
 	);
 }
