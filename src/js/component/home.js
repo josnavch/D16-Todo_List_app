@@ -10,38 +10,48 @@ let x = 0;
 
 //create your first component
 export function Home() {
-	let [value, setName] = useState("");
+	const [todo, setTodo] = useState("");
+	const [tododel, setdelTodo] = useState("");
 	let addTodo = "";
-	//let tareas = [];
+	let delTodo = "";
 
 	function addTodos(event, addTodo) {
 		if (event.key === "Enter") {
-			tareas.push(addTodo);
-			//		console.log(tareas, tareas.length);
+			if (addTodo) {
+				tareas.push(addTodo);
+				setTodo("");
+			} else {
+				alert("You must write something!");
+			}
 		}
 		x = tareas.length;
 	}
 
+	function delTodos(e) {
+		console.log(e.target);
+	}
+
 	const TodosHTML = tareas.map((tarea, i) => {
-		return <li key={tarea}>{tarea}</li>;
+		return <li key={i}>{tarea}</li>;
 	});
 
 	return (
 		<div className="list">
 			<div className="text-center mt-5">
-				<h1 className="titulo">todos</h1>
+				<h1 className="titulo">My To do list</h1>
 			</div>
 			<div className="text-center mt-5">
 				<ul className="list-group">
 					<input
 						id="myInput"
 						placeholder="Enter your to do's"
-						onChange={e => setName(e.target.value)}
-						onKeyPress={e => addTodos(e, value)}></input>
+						value={todo}
+						onChange={e => setTodo(e.target.value)}
+						onKeyPress={e => addTodos(e, todo)}></input>
 					{TodosHTML}
 				</ul>
 			</div>
-			<div className="card-footer text-muted total">Total: {x} todos</div>
+			<div className="card-footer text-muted total"> {x} items left</div>
 		</div>
 	);
 }
