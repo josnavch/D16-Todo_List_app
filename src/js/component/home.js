@@ -11,7 +11,7 @@ let x = 0;
 //create your first component
 export function Home() {
 	const [todo, setTodo] = useState("");
-	const [tododel, setdelTodo] = useState("");
+	const [tododel, setDelTodo] = useState("");
 	let addTodo = "";
 	let delTodo = "";
 
@@ -27,12 +27,17 @@ export function Home() {
 		x = tareas.length;
 	}
 
-	function delTodos(e) {
-		console.log(e.target);
+	function alertClicked(event) {
+		//console.log(event);
+		alert("You clicked the third ListGroupItem");
 	}
 
 	const TodosHTML = tareas.map((tarea, i) => {
-		return <li key={i}>{tarea}</li>;
+		return (
+			<li key={i} id={i} value={tarea}>
+				{tarea}
+			</li>
+		);
 	});
 
 	return (
@@ -48,9 +53,10 @@ export function Home() {
 						value={todo}
 						onChange={e => setTodo(e.target.value)}
 						onKeyPress={e => addTodos(e, todo)}></input>
-					{TodosHTML}
+					<div className="list-group-items"> {TodosHTML}</div>
 				</ul>
 			</div>
+
 			<div className="card-footer text-muted total"> {x} items left</div>
 		</div>
 	);
