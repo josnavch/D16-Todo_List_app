@@ -33,6 +33,10 @@ body{
     font-size: 0.5rem;
 }
 
+li{
+    list-style-type: none;
+}
+
 ul li.checked::before {
   content: '';
   position: absolute;
