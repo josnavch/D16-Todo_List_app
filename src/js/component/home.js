@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Components } from "react";
 
 let tareas = [];
+
 let i = 0;
 let tarea = "";
 let x = 0;
