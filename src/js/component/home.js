@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from "react";
-
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import React, { useState, useEffect, Components } from "react";
 
 let tareas = [];
 let i = 0;
@@ -53,7 +50,7 @@ export function Home() {
 						value={todo}
 						onChange={e => setTodo(e.target.value)}
 						onKeyPress={e => addTodos(e, todo)}></input>
-					<div className="list-group-items"> {TodosHTML}</div>
+					<div className="list-group-items">{TodosHTML}</div>
 				</ul>
 			</div>
 
