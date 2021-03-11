@@ -1,19 +1,17 @@
-import React, { useState, useEffect, Components } from "react";
+import React, { useState, useEffect } from "react";
 
-let tareas = [];
-
-let i = 0;
-let tarea = "";
 let x = 0;
 
 //create your first component
 export function Home() {
 	const [todo, setTodo] = useState("");
-	const [tododel, setDelTodo] = useState("");
-	let addTodo = "";
-	let delTodo = "";
+	const [tareas, setTarea] = useState([]);
 
-	function addTodos(event, addTodo) {
+	let addTodo = "";
+
+	function addTodos(event, item) {
+		addTodo = event.target.value;
+		//console.log(todo);
 		if (event.key === "Enter") {
 			if (addTodo) {
 				tareas.push(addTodo);
@@ -25,14 +23,22 @@ export function Home() {
 		x = tareas.length;
 	}
 
-	function alertClicked(event) {
-		//console.log(event);
-		alert("You clicked the third ListGroupItem");
+	function removeItem(i) {
+		let newtareas = tareas.filter(item => item != i);
+		x = newtareas.length;
+		setTarea(newtareas);
 	}
 
 	const TodosHTML = tareas.map((tarea, i) => {
 		return (
-			<li key={i} id={i} value={tarea}>
+			<li
+				className="list-group-item"
+				onClick={() => {
+					removeItem(tarea);
+				}}
+				key={i}
+				id={i}
+				value={tarea}>
 				{tarea}
 			</li>
 		);
@@ -41,17 +47,17 @@ export function Home() {
 	return (
 		<div className="list">
 			<div className="text-center mt-5">
-				<h1 className="titulo">My To do list</h1>
+				<h1 className="titulo">todos</h1>
 			</div>
 			<div className="text-center mt-5">
-				<ul className="list-group">
+				<ul className="list-group list-group-flush">
 					<input
 						id="myInput"
-						placeholder="Enter your to do's"
 						value={todo}
+						placeholder="Enter your to do's"
 						onChange={e => setTodo(e.target.value)}
 						onKeyPress={e => addTodos(e, todo)}></input>
-					<div className="list-group-items">{TodosHTML}</div>
+					<div>{TodosHTML}</div>
 				</ul>
 			</div>
 
